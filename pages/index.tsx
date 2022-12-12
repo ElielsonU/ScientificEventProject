@@ -19,14 +19,14 @@ export default function Home() {
     if (inputElement.name === "email") setEmail(inputElement.value);
     if (inputElement.name === "password") setPassword(inputElement.value);
     if (inputElement.id === "isLogin") setIsLogin(!isLogin);
-    if (inputElement.name === "userType") setUserType(inputElement.value);
+    if (inputElement.name === "isAdmin") setIsAdmin(!!Number(inputElement.value));
   };
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-  const [userType, setUserType] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const resTokenToCookie = (TokenCookie: string) => {
     setCookie("loggedAs", TokenCookie, {
@@ -34,22 +34,36 @@ export default function Home() {
     })
   }
 
+  type postProps = {
+    username?: string;
+    email: string;
+    password: string;
+    isAdmin?: boolean;
+  }
+
+  const authPost = async (url: string, props: postProps ) => {
+    try {
+      const res = await axios.post(url, props)
+
+      const TokenCookie = res.data.msg
+      resTokenToCookie(TokenCookie)
+    } catch (err) { console.error(err) }
+  }
+
   const formSubmitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (isLogin) {
-      try {
-        const res = await axios.post("http://localhost:3000/api/login", {
-          email: email.toLowerCase(), 
-          password
-        })
-
-        const TokenCookie = res.data.msg
-        resTokenToCookie(TokenCookie)
-
-        return
-      } catch (err) { console.error(err) }
+      authPost("http://localhost:3000/api/login", {
+        email: email.toLowerCase(), 
+        password
+      })
     } else {
-      
+      authPost("http://localhost:3000/api/signup", {
+        email: email.toLowerCase(), 
+        password, 
+        username, 
+        isAdmin
+      })
     }
   };
 
@@ -101,9 +115,9 @@ export default function Home() {
               <label>
                 <input
                   type="radio"
-                  name="userType"
+                  name="isAdmin"
                   onChange={inputChangeHandler}
-                  value="user"
+                  value={0}
                   required
                 />
                 Normal User
@@ -111,9 +125,9 @@ export default function Home() {
               <label>
                 <input
                   type="radio"
-                  name="userType"
+                  name="isAdmin"
                   onChange={inputChangeHandler}
-                  value="adm"
+                  value={1}
                   required
                 />
                 Admin
