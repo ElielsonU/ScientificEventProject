@@ -11,22 +11,17 @@ const db = serverlessMysql({
   },
 });
 
-const getUsers = async () => {
-  const results = await db.query("SELECT * FROM scienticevent.users");
-
-  await db.end();
-};
-
-const TokenGenerator = async (IdUsers: number) => {
+const TokenGenerator = async (IdUsers?: number) => {
   const newToken = randomUUID();
-
-  await db.query(
-    "UPDATE scienticevent.users \
-    SET Token = ?  \
-    WHERE IdUsers = ?",
-    [newToken, IdUsers]
-  );
-  await db.end();
+  if (IdUsers){
+    await db.query(
+      "UPDATE scienticevent.users \
+      SET Token = ?  \
+      WHERE IdUsers = ?",
+      [newToken, IdUsers]
+    );
+    await db.end();
+  }
 
   return newToken;
 };
@@ -34,6 +29,8 @@ const TokenGenerator = async (IdUsers: number) => {
 interface getUserProps {
   email: string;
   password: string;
+  username?: string;
+  isAdmin?: boolean;
 }
 
 interface getUserResults {
@@ -45,27 +42,48 @@ interface getUserResults {
   Token: string;
 }
 
-const loginToUser = async (props: getUserProps) => {
+const getUsers = async () => {
+  const results = await db.query("SELECT * FROM scienticevent.users");
+  await db.end();
+};
+
+const getUserByEmail = async (email: string) => {
   const results: getUserResults = JSON.parse(
     JSON.stringify(
       await db.query(
         "SELECT * FROM scienticevent.users \
    WHERE Email = ?;",
-        [props.email]
+        [email]
       )
     )
   )[0];
   await db.end();
-  if (!(results?.UserPassword == props.password)) {
-    return null;
-  }
+
+  return results
+}
+
+const loginToUser = async (props: getUserProps) => {
+  const results = await getUserByEmail(props.email)
+
+  if (!(results?.UserPassword == props.password)) { return null; }
+
   const generatedToken = await TokenGenerator(results.IdUsers);
 
-  return {
-    Token: generatedToken,
-  };
+  return { Token: generatedToken, };
 };
 
 
+const registerUser = async (props: getUserProps) => {
+  if(await getUserByEmail(props.email)) { return false; }
+  const UserToken = await TokenGenerator()
 
-export { getUsers, loginToUser };
+  if(await db.query(
+    "INSERT INTO scienticevent.users(Username, Email, UserPassword, Token, IsAdmin)\
+    VALUES (?, ?, ?, ?, ?)", [props.username, props.email, props.password, UserToken, props.isAdmin]
+    )) {
+      await db.end()
+      return UserToken
+    }
+}
+
+export { getUsers, loginToUser, registerUser };
