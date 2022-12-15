@@ -10,12 +10,13 @@ const db = serverlessMysql({
     user: process.env.MYSQL_USER,
   },
 });
+db.query("USE scientificevent")
 
 const TokenGenerator = async (IdUsers?: number) => {
   const newToken = randomUUID();
   if (IdUsers){
     await db.query(
-      "UPDATE scienticevent.users \
+      "UPDATE users \
       SET Token = ?  \
       WHERE IdUsers = ?",
       [newToken, IdUsers]
@@ -43,15 +44,28 @@ interface getUserResults {
 }
 
 const getUsers = async () => {
-  const results = await db.query("SELECT * FROM scienticevent.users");
+  const results = await db.query("SELECT * FROM users");
   await db.end();
 };
+
+const getUsernameByToken = async (token: string) => {
+  const results: getUserResults = JSON.parse(
+    JSON.stringify(
+      await db.query(
+        "SELECT * FROM users \
+        WHERE Token = ?", [token])
+    )
+  )[0];
+  await db.end()
+
+  return results.Username
+}
 
 const getUserByEmail = async (email: string) => {
   const results: getUserResults = JSON.parse(
     JSON.stringify(
       await db.query(
-        "SELECT * FROM scienticevent.users \
+        "SELECT * FROM users \
    WHERE Email = ?;",
         [email]
       )
@@ -78,7 +92,7 @@ const registerUser = async (props: getUserProps) => {
   const UserToken = await TokenGenerator()
 
   if(await db.query(
-    "INSERT INTO scienticevent.users(Username, Email, UserPassword, Token, IsAdmin)\
+    "INSERT INTO users(Username, Email, UserPassword, Token, IsAdmin)\
     VALUES (?, ?, ?, ?, ?)", [props.username, props.email, props.password, UserToken, props.isAdmin]
     )) {
       await db.end()
@@ -86,4 +100,4 @@ const registerUser = async (props: getUserProps) => {
     }
 }
 
-export { getUsers, loginToUser, registerUser };
+export { getUsers, loginToUser, registerUser, getUsernameByToken };
