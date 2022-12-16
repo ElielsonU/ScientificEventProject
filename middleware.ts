@@ -1,6 +1,7 @@
 import { NextMiddleware, NextResponse } from "next/server";
 
 const middleware: NextMiddleware = (req, e) => {
+  // console.log(req.nextUrl.pathname)
   const thisPath = req.nextUrl.pathname;
   const token = req.cookies.get("loggedAs");
   
