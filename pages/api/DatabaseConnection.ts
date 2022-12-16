@@ -27,14 +27,14 @@ const TokenGenerator = async (IdUsers?: number) => {
   return newToken;
 };
 
-interface getUserProps {
+interface UserProps {
   email: string;
   password: string;
   username?: string;
   isAdmin?: boolean;
 }
 
-interface getUserResults {
+interface UserResults {
   IdUsers: number;
   Username: string;
   UserPassword: string;
@@ -48,8 +48,8 @@ const getUsers = async () => {
   await db.end();
 };
 
-const getUsernameByToken = async (token: string) => {
-  const results: getUserResults = JSON.parse(
+const getUserByToken = async (token: string) => {
+  const results: UserResults = JSON.parse(
     JSON.stringify(
       await db.query(
         "SELECT * FROM users \
@@ -58,11 +58,11 @@ const getUsernameByToken = async (token: string) => {
   )[0];
   await db.end()
 
-  return results.Username
+  return results
 }
 
 const getUserByEmail = async (email: string) => {
-  const results: getUserResults = JSON.parse(
+  const results: UserResults = JSON.parse(
     JSON.stringify(
       await db.query(
         "SELECT * FROM users \
@@ -76,7 +76,7 @@ const getUserByEmail = async (email: string) => {
   return results
 }
 
-const loginToUser = async (props: getUserProps) => {
+const loginToUser = async (props: UserProps) => {
   const results = await getUserByEmail(props.email)
 
   if (!(results?.UserPassword == props.password)) { return null; }
@@ -87,17 +87,41 @@ const loginToUser = async (props: getUserProps) => {
 };
 
 
-const registerUser = async (props: getUserProps) => {
+const registerUser = async (props: UserProps) => {
   if(await getUserByEmail(props.email)) { return false; }
   const UserToken = await TokenGenerator()
 
-  if(await db.query(
+  await db.query(
     "INSERT INTO users(Username, Email, UserPassword, Token, IsAdmin)\
     VALUES (?, ?, ?, ?, ?)", [props.username, props.email, props.password, UserToken, props.isAdmin]
-    )) {
-      await db.end()
-      return UserToken
-    }
+    )
+  await db.end();
+  return UserToken;
+};
+
+interface ArticleProps {
+  articleTitle: string;
+  articleContent: string;
+  defAllowed: boolean;
+  IdUsers: string;
 }
 
-export { getUsers, loginToUser, registerUser, getUsernameByToken };
+const addNewArticle = async (props: ArticleProps) => {
+  await db.query(
+    "INSERT INTO articles(Title, Content, Allowed, User_ID) VALUES (?, ?, ?, ?)",
+    [props.articleTitle, props.articleContent, props.defAllowed, props.IdUsers]
+    )
+  await db.end()
+}
+
+interface ArticleFilter {
+  IdUsers?: number;
+  allowed?: boolean;
+  title?: string;
+}
+
+const getArticles = async (props: ArticleFilter) => {
+  
+}
+
+export { getUsers, loginToUser, registerUser, getUserByToken, addNewArticle };

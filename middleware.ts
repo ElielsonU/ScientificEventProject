@@ -4,9 +4,6 @@ const middleware: NextMiddleware = (req, e) => {
   const thisPath = req.nextUrl.pathname;
   const token = req.cookies.get("loggedAs");
   
-  /* if (thisPath == "/") {
-    return NextResponse.redirect("http://localhost:3000/login");
-  } */
   if (thisPath == "/login" && token) {
     return NextResponse.redirect("http://localhost:3000/home");
   }
