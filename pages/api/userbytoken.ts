@@ -1,11 +1,11 @@
-import { getUserByToken } from "./DatabaseConnection";
+import { getUsers } from "./DatabaseConnection";
 import { NextApiHandler } from "next";
 const handler: NextApiHandler = async (req, res) => {
   if (!req.cookies.loggedAs) {
     res.status(400).json({ msg: "Missing values." });
     return;
   }
-  const msg = (await getUserByToken(req.cookies.loggedAs)).Username;
+  const msg = (await getUsers({token: req.cookies.loggedAs}));
 
   if (!msg) {
     res.status(401).json({ msg: "Invalid token." });

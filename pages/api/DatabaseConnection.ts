@@ -10,7 +10,8 @@ const db = serverlessMysql({
     user: process.env.MYSQL_USER,
   },
 });
-db.query("USE scientificevent")
+db.query("USE scientificevent");
+db.end();
 
 const TokenGenerator = async (IdUsers?: number) => {
   const newToken = randomUUID();
@@ -34,50 +35,42 @@ interface UserProps {
   isAdmin?: boolean;
 }
 
-interface UserResults {
-  IdUsers: number;
-  Username: string;
-  UserPassword: string;
-  Email: string;
-  IsAdmin: boolean;
-  Token: string;
+interface UserFilters {
+  token?: string;
+  email?: string;
 }
 
-const getUsers = async () => {
-  const results = await db.query("SELECT * FROM users");
-  await db.end();
-};
+const getUsers = async (props: UserFilters) => {
+  const query = "SELECT * FROM users"
+  if (!props.token && !props.email){
+    const results = JSON.parse(
+      JSON.stringify(
+        await db.query(query)
+      )
+    );
+    await db.end();
+    return results
+  }
 
-const getUserByToken = async (token: string) => {
-  const results: UserResults = JSON.parse(
-    JSON.stringify(
-      await db.query(
-        "SELECT * FROM users \
-        WHERE Token = ?", [token])
-    )
-  )[0];
-  await db.end()
-
-  return results
-}
-
-const getUserByEmail = async (email: string) => {
-  const results: UserResults = JSON.parse(
-    JSON.stringify(
-      await db.query(
-        "SELECT * FROM users \
-   WHERE Email = ?;",
-        [email]
+  const results = JSON.parse(JSON.stringify(
+    props.email 
+    ?await db.query(
+      "SELECT * FROM users \
+      WHERE Email = ?;",
+      [props.email]
+      )
+    :await db.query(
+      "SELECT * FROM users \
+      WHERE Token = ?", [props.token]
       )
     )
   )[0];
   await db.end();
-
-  return results
-}
+  return results;
+};
 
 const loginToUser = async (props: UserProps) => {
-  const results = await getUserByEmail(props.email)
+  const results = await getUsers({email: props.email})
 
   if (!(results?.UserPassword == props.password)) { return null; }
 
@@ -88,7 +81,7 @@ const loginToUser = async (props: UserProps) => {
 
 
 const registerUser = async (props: UserProps) => {
-  if(await getUserByEmail(props.email)) { return false; }
+  if(await getUsers({email: props.email})) { return false; }
   const UserToken = await TokenGenerator()
 
   await db.query(
@@ -121,7 +114,28 @@ interface ArticleFilter {
 }
 
 const getArticles = async (props: ArticleFilter) => {
-  
+  let query = "SELECT * FROM articles WHERE "
+  if (!props.IdUsers) {
+    query += `Allowed = ${!!props.allowed}`
+    query += props.title ? ` AND Title LIKE '%${props.title}%' ` : ""
+    const res = JSON.parse(JSON.stringify(await db.query(query)));
+    db.end();
+    return res;
+  }
+
+  if (props.IdUsers) { query += `User_ID = ${props.IdUsers} ` }
+  if (props.title) { 
+    query += props.IdUsers
+    ?`AND Title LIKE '%${props.title}%' `
+    :`Title LIKE '%${props.title}%' `
+  }
+  query += props.IdUsers || props.title
+  ?`AND Allowed = ${!!props.allowed}`
+  :`Allowed = ${!!props.allowed}`
+  const res = JSON.parse(JSON.stringify(await db.query(query)));
+  db.end();
+
+  return res;
 }
 
-export { getUsers, loginToUser, registerUser, getUserByToken, addNewArticle };
+export { getUsers, loginToUser, registerUser, addNewArticle, getArticles };
