@@ -138,4 +138,27 @@ const getArticles = async (props: ArticleFilter) => {
   return res;
 }
 
-export { getUsers, loginToUser, registerUser, addNewArticle, getArticles };
+interface adminCommandsProps{
+  IdArticle: number;
+  command: boolean;
+} 
+
+const adminCommands = async (props: adminCommandsProps) => { 
+  const articlesExists = await db.query("SELECT * FROM articles WHERE IdArticle = ?", [props.IdArticle])
+  db.end()
+  if (articlesExists) { 
+    props.command
+    ?await db.query(
+      "UPDATE articles \
+      SET allowed = true \
+      WHERE IdArticle = ?", [props.IdArticle])
+    :await db.query(
+      "DELETE FROM articles \
+      WHERE IdArticle = ?", [props.IdArticle]);
+    db.end()
+    return true
+  }
+    return false
+}
+
+export { getUsers, loginToUser, registerUser, addNewArticle, getArticles, adminCommands };

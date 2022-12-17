@@ -11,6 +11,7 @@ export const getStaticProps: GetStaticProps = async () => {
   
   const artRes = await axios.get("http://localhost:3000/api/getallarticles")
   const allRes = artRes.data.msg
+  
   return {
     props: {
       allRes,
@@ -35,10 +36,10 @@ interface pageProps {
 
 export default function Page(props: pageProps) {
 
+  const router = useRouter();
   const [filterArticleTitle, setFilterArticleTitle] = useState("")
   const [filterArticleOwnerID, setFilterArticleOwnerID] = useState(0)
   const [filterArticleAllowed, setfilterArticleAllowed] = useState(false)
-  const router = useRouter();
   const [resArticles, setResArticles] = useState([]);
   const [articleTitle, setArticleTitle] = useState("");
   const [articleContent, setArticleContent] = useState("");
@@ -95,11 +96,20 @@ export default function Page(props: pageProps) {
         "http://localhost:3000/api/submitarticle",
         { articleTitle, articleContent }
         );
-      console.log(res.data.msg)
+      setArticleContent("")
+      setArticleTitle("")
+      alert(res.data.msg)
     } catch(err: any) {
       console.log(err.message)
     }
   };
+
+  const adminActionsHandler = async (IdArticle: number, command: boolean) => {
+    const res = await axios.post("http://localhost:3000/api/adminactions", {IdArticle, command})
+    alert(res.data.msg)
+    await getArticlesHandler()
+    return
+  }
 
   return (
     <>
@@ -108,7 +118,7 @@ export default function Page(props: pageProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <a href="">{username}</a>
+        <a>{username}</a>
         <h1>Title</h1>
         {isAdmin
         ?<span>Total of users: <var>{props.subbedUsers}</var></span>
@@ -169,14 +179,21 @@ export default function Page(props: pageProps) {
         {isAdmin
         ?<p>Total of articles: <var>{props.allRes}</var></p>
         :null}
-        {resArticles.map((article: articlesProps) => 
-        <li key={article.IdArticle}>
+        {resArticles.map((article: articlesProps) => {
+        return (<li key={article.IdArticle}>
           <h3>{article.Title}</h3>
           <p>{article.Content}</p>
           {isAdmin
           ?<span>Id do usuário: <var>{article.User_ID}</var></span>
           :null}
-        </li>
+          {!article.Allowed
+          ?<div>
+            <button onClick={() => {adminActionsHandler(article.IdArticle, true)}}>Accept</button>
+            <button onClick={() => {adminActionsHandler(article.IdArticle, false)}}>Remove</button>
+          </div>
+          :null}
+        </li>)
+          }
         )}
       </ul>
     </>
