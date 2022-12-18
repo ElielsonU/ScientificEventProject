@@ -154,6 +154,7 @@ export default function Home() {
               </>
             )}
             <button type="submit">Submit</button>
+            {isLogin ? <a href="http://localhost:3000/resetpassword">I forgot my password</a> : null}
           </form>
         </fieldset>
       )}

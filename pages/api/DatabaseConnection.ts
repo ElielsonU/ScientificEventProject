@@ -40,6 +40,11 @@ interface UserFilters {
   email?: string;
 }
 
+interface PasswordChangeProps {
+  email: string;
+  password: string;
+}
+
 const getUsers = async (props: UserFilters) => {
   const query = "SELECT * FROM users"
   if (!props.token && !props.email){
@@ -91,6 +96,18 @@ const registerUser = async (props: UserProps) => {
   await db.end();
   return UserToken;
 };
+
+const updateUserPassword = async (props: PasswordChangeProps) => {
+  const passwordUpdated = await db.query(
+    "UPDATE users SET UserPassword = ? WHERE Email = ?"
+    ,[props.password, props.email]);
+  db.end();
+  if (passwordUpdated) {
+    const IdUsers = (await getUsers({email: props.email})).IdUsers;
+    return await TokenGenerator(IdUsers)
+  }
+  return false
+}
 
 interface ArticleProps {
   articleTitle: string;
@@ -161,4 +178,4 @@ const adminCommands = async (props: adminCommandsProps) => {
     return false
 }
 
-export { getUsers, loginToUser, registerUser, addNewArticle, getArticles, adminCommands };
+export { getUsers, loginToUser, registerUser, addNewArticle, getArticles, adminCommands, updateUserPassword };
