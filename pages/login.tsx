@@ -5,6 +5,7 @@ import React from "react";
 import axios from "axios";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   return {
@@ -154,10 +155,13 @@ export default function Home() {
               </>
             )}
             <button type="submit">Submit</button>
-            {isLogin ? <a href="http://localhost:3000/resetpassword">I forgot my password</a> : null}
+            {isLogin ? <Link href="/resetpassword">I forgot my password</Link> : null}
           </form>
         </fieldset>
       )}
+      <footer>
+        By: Science now
+      </footer>
     </>
   );
 }
