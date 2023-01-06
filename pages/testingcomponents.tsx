@@ -1,4 +1,11 @@
 import Button from "../components/Button" // working
+import TextInput from "../components/TextInput" // working
+import Checkbox from "../components/Checkbox" // working
+import NumberInput from "../components/NumberInput" // working
+
+// mini href 
+// titles
+// first page
 
 //white #FCF9F8
 //black #2A292C
@@ -6,9 +13,11 @@ import Button from "../components/Button" // working
 //blue #2288E3
 
 export default function Page() {
-  return (
-  <Button backgroundColor="#2288E3" buttonType={"signup"} textColor="#2A292C">
-    
-  </Button>
+  return (    
+  <>
+    <NumberInput fontSize={20} textColor={"#99A6B4"}>
+      User ID: 
+    </NumberInput>
+  </>
   )
 }

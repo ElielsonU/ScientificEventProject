@@ -5,6 +5,7 @@ interface ButtonsProps extends PropsWithChildren {
   textColor: string;
   backgroundColor: string;
   disabled?: boolean;
+  onClick: React.MouseEventHandler;
   buttonType: "login"|"signup"|"resetpassword"|"submit";
 }
 
@@ -13,11 +14,12 @@ const Button:React.FC<ButtonsProps> = ({
   textColor,
   buttonType,
   disabled,
-  children
+  children,
+  onClick
 }
   ) => {
     if (buttonType == "login") {
-      return <StyledButton backgroundColor={backgroundColor} textColor={textColor} border>
+      return <StyledButton backgroundColor={backgroundColor} textColor={textColor} border onClick={onClick}>
       {children}
     </StyledButton>
     }
@@ -27,17 +29,17 @@ const Button:React.FC<ButtonsProps> = ({
         {children}
       </StyledButton>
       )
-      :(<StyledButton backgroundColor={backgroundColor} textColor={textColor} hoverDropShadow>
+      :(<StyledButton backgroundColor={backgroundColor} textColor={textColor} hoverDropShadow onClick={onClick}>
           {children}
         </StyledButton>
       )
     }
     if (buttonType == "submit") {
-      return <StyledButton backgroundColor={backgroundColor} textColor={textColor} defaultDropShadow>
+      return <StyledButton backgroundColor={backgroundColor} textColor={textColor} defaultDropShadow onClick={onClick}>
         {children}
       </StyledButton>
     }
-    return <StyledButton backgroundColor={backgroundColor} textColor={textColor}>
+    return <StyledButton backgroundColor={backgroundColor} textColor={textColor} onClick={onClick}>
       {children}
     </StyledButton>
     
