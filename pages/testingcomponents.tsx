@@ -2,8 +2,9 @@ import Button from "../components/Button" // working
 import TextInput from "../components/TextInput" // working
 import Checkbox from "../components/Checkbox" // working
 import NumberInput from "../components/NumberInput" // working
+import Header from "../components/Header" // working
 
-// mini href 
+// mini href (Link)
 // titles
 // first page
 
@@ -15,9 +16,9 @@ import NumberInput from "../components/NumberInput" // working
 export default function Page() {
   return (    
   <>
-    <NumberInput fontSize={20} textColor={"#99A6B4"}>
-      User ID: 
-    </NumberInput>
+    <Header justifyContent="space-evenly">
+      <h1>Coral Bleaching</h1>
+    </Header>
   </>
   )
 }
