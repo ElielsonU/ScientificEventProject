@@ -2,10 +2,10 @@ import { GetStaticProps } from "next";
 
 export const getStaticProps: GetStaticProps = (context) => {
   return {
-    /* redirect: {
+    redirect: {
       destination: "http://localhost:3000/login",
       permanent: true    
-    },  */
+    }, 
     props : {
 
     }

@@ -3,6 +3,8 @@ import TextInput from "../components/TextInput" // working
 import Checkbox from "../components/Checkbox" // working
 import NumberInput from "../components/NumberInput" // working
 import Header from "../components/Header" // working
+import Link from "next/link" // working
+import Div from "../components/Div" // working
 
 // mini href (Link)
 // titles
@@ -16,9 +18,9 @@ import Header from "../components/Header" // working
 export default function Page() {
   return (    
   <>
-    <Header justifyContent="space-evenly">
-      <h1>Coral Bleaching</h1>
-    </Header>
+    <Div alignItems="flex-end" flexDirection="row" height="100%" width="auto" justifyContent="flex-end" backgroundColor="#2A292C" borderRadius="15px" boxShadow="#2288E3">
+
+    </Div>
   </>
   )
 }
