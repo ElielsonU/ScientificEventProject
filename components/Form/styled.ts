@@ -6,9 +6,16 @@ interface StyledFormProps {
   height: string;
 }
 
-const StyledForm = styled.form`
+const StyledForm = styled.form<StyledFormProps>`
   display: flex;
-  width: auto;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: ${props => props.width};
+  height: ${props => props.height};
+  background-color: ${props => props.backgroundColor};
+  padding: 10px 5px;
+
 `
 
 export default StyledForm
