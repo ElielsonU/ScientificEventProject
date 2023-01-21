@@ -14,7 +14,7 @@ const StyledForm = styled.form<StyledFormProps>`
   width: ${props => props.width};
   height: ${props => props.height};
   background-color: ${props => props.backgroundColor};
-  padding: 10px 5px;
+  padding: 25px 5px;
 
 `
 

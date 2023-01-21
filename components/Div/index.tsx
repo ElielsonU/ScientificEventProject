@@ -4,12 +4,14 @@ import StyledDiv from "./styled";
 interface DivProps extends PropsWithChildren {
   width: string;
   height: string;
-  justifyContent: "space-between"|"space=around"|"space-evenly"|"center"|"flex-end"|"flex-start"
+  justifyContent: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
   alignItems: "space-between"|"space=around"|"space-evenly"|"center"|"flex-end"|"flex-start"
   flexDirection: "row"|"column"
   borderRadius?: string;
   backgroundColor?: string;
+  backgroundImage?: string;
   boxShadow?: string;
+  Id?: string;
 }
 
 const Div:React.FC<DivProps> = ({
@@ -20,10 +22,12 @@ const Div:React.FC<DivProps> = ({
   flexDirection,
   borderRadius,
   backgroundColor,
+  backgroundImage,
   boxShadow,
+  Id,
   children
 }) => (
-  <StyledDiv alignItems={alignItems} justifyContent={justifyContent} flexDirection={flexDirection} height={height} width={width} borderRadius={borderRadius} backgroundColor={backgroundColor} boxShadow={boxShadow}>
+  <StyledDiv alignItems={alignItems} justifyContent={justifyContent} flexDirection={flexDirection} height={height} width={width} borderRadius={borderRadius} backgroundColor={backgroundColor} boxShadow={boxShadow} backroundImage={backgroundImage} id={Id}>
     {children}
   </StyledDiv>
 )

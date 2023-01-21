@@ -31,8 +31,8 @@ const NumberInput:React.FC<NumberInputProps> = ({
       onChange?onChange(event):null
       }} type="number" min={0} textColor={textColor} fontSize={fontSize}/>
     <div style={{display: "flex", width: fontSize, flexDirection: "column"}}>
-     <Image src="/icons/arrowUp.png" width={fontSize*0.90} height={fontSize*0.70} alt={"Arrow Up"} onClick={() => {InputValueChangeHandler(1)}}/>
-     <Image src="/icons/arrowDown.png" width={fontSize*0.90} height={fontSize*0.70} alt={"Arrow Down"} onClick={() => {InputValueChangeHandler(-1)}}/>
+     <Image src="/icons/arrowUp.png" width={fontSize*0.90} height={fontSize*0.70} alt={"Arrow Up"} onChange={() => {InputValueChangeHandler(1)}}/>
+     <Image src="/icons/arrowDown.png" width={fontSize*0.90} height={fontSize*0.70} alt={"Arrow Down"} onChange={() => {InputValueChangeHandler(-1)}}/>
     </div>
   </StyledNumberInputLabel>
   )

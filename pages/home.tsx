@@ -94,6 +94,7 @@ export default function Page(props: pageProps) {
 
   const disconnectHandler = () => {
     deleteCookie("loggedAs");
+    console.log("alou")
     router.reload();
   };
 
@@ -141,7 +142,7 @@ export default function Page(props: pageProps) {
             Total of users: <var>{props.subbedUsers}</var>
           </span>
         ) : null}
-        <button onClick={disconnectHandler}>Disconnect</button>
+        <button onClickCapture={disconnectHandler}>Disconnect</button>
       </header>
       <form onSubmit={articleSubmitHandler}>
         <input
@@ -192,7 +193,7 @@ export default function Page(props: pageProps) {
             <input
               type="checkbox"
               name="allowedFilter"
-              onClick={inputChangeHandler}
+              onChange={inputChangeHandler}
             />
           </label>
         ) : null}
@@ -215,12 +216,12 @@ export default function Page(props: pageProps) {
                   </span>
                 ) : null}
                 {!article.Allowed ? (
-                  <button onClick={() => {adminActionsHandler(article.IdArticle, true);}}>
+                  <button onClickCapture={() => {adminActionsHandler(article.IdArticle, true);}}>
                     Accept
                   </button>
                 ) : null}
                 {isAdmin || userID == article.User_ID ? (
-                  <button onClick={() => {adminActionsHandler(article.IdArticle, false);}}>
+                  <button onClickCapture={() => {adminActionsHandler(article.IdArticle, false);}}>
                     Remove
                   </button>
                 ) : null}

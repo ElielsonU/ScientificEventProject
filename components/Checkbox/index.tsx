@@ -8,6 +8,7 @@ interface CheckboxProps extends PropsWithChildren {
   fontSize: number;
   onChange?: React.ChangeEventHandler;
   value: string|number;
+  name: string;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -15,6 +16,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   fontSize,
   onChange,
   value,
+  name,
   children
 }) => {
   const [isChoiced, setIsChoiced] = useState("/icons/cross.png")
@@ -28,7 +30,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         return setIsChoiced("/icons/correct.png")
       }
       setIsChoiced("/icons/cross.png")
-    }} value={value} type="checkbox"/>
+    }} value={value} type="checkbox" name={name}/>
     <Image 
     src={isChoiced} 
     width={fontSize-1} 

@@ -6,7 +6,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   display: flex;
   justify-content: ${props => props.justifyContent};
   align-items: center;
-  margin: 35px 30px;
+  margin: 10px 0px;
 `
 
 export default StyledHeader

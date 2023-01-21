@@ -6,6 +6,8 @@ interface FormProps extends PropsWithChildren {
   width: string;
   height: string;
   onSubmit: React.FormEventHandler;
+  Id?: string;
+  name?: string;
 }
 
 const Form: React.FC<FormProps> = ({
@@ -13,9 +15,11 @@ const Form: React.FC<FormProps> = ({
   width,
   height,
   onSubmit,
+  Id,
+  name,
   children
 }) => (
-  <StyledForm backgroundColor={backgroundColor} width={width} height={height} onSubmit={onSubmit}>{children}</StyledForm>
+  <StyledForm backgroundColor={backgroundColor} width={width} height={height} onSubmit={onSubmit} id={Id} name={name}>{children}</StyledForm>
 )
 
 export default Form

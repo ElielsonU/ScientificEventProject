@@ -3,15 +3,39 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
+import Head from "next/head";
+import Div from "../components/Div";
+import Form from "../components/Form";
+import TextInput from "../components/TextInput";
 
-export const getStaticProps: GetStaticProps = () => {
+export const getStaticProps: GetStaticProps = async (context) => {
+  const color1 = "#FCF9F8"
+  const color2 = "#2A292C"
+  const color3 = "#2288E3"
+  const color4 = "#99A6B4"
+  const border = "10px"
+  
   return {
-    props: {},
-    revalidate: 60
-  }
+    revalidate: 60 * 6,
+    props: {
+      color1,
+      color2,
+      color3,
+      color4,
+      border
+    },
+  };
+};
+
+interface PageProps {
+  color1: string;
+  color2: string;
+  color3: string;
+  color4: string;
+  border: string;
 }
 
-export default function Page() {
+export default function Page(props: PageProps) {
 
   const router = useRouter()
   const [email, setEmail] = useState("")
@@ -55,17 +79,23 @@ export default function Page() {
 
   return (
     <>
-      {emailExists
-      ? <form onSubmit={formSubmitHandler} name="password_change_form">
-          <input type="password" name="new_password" placeholder="Your new password" onChange={inputChangeHandler} minLength={8} value={newPassword} required/>
-          <input type="password" name="repeat_password" placeholder="Repeat this" onChange={inputChangeHandler} required/>
-          <button>Submit</button>
-        </form>
-      : <form onSubmit={formSubmitHandler} name="email_form">
-          <input type="text" placeholder="Inform your email" name="email" value={email} onChange={inputChangeHandler} required/>
-          <button>Submit</button>
-        </form>}
-      
+    <Head>
+     <title>Reset your password</title>
+    </Head>
+      <Div height="100%" width="100%" backgroundImage="background2.png" alignItems="center" flexDirection="row" justifyContent="center">
+        <Div height="430px" width="380px" alignItems="center" justifyContent="space-between" borderRadius="15px" boxShadow={props.color4} flexDirection="column" Id="LoginDiv" backgroundColor={props.color4}>
+          <Form backgroundColor={props.color2} height="185px" width="100%" onSubmit={formSubmitHandler} name="email_form">
+            <h2>Reset Your Password</h2>
+            <Div alignItems="center" flexDirection="row" height="auto" justifyContent="space-between" width="auto">
+              <TextInput fontSize="24px" name="email" value={email} placeholder="Email" textColor={props.color4} type="email" onChange={inputChangeHandler} required width="333px"/>
+              
+            </Div>
+          </Form>
+          <Form backgroundColor={props.color2} height="185px" width="100%" onSubmit={formSubmitHandler}>
+
+          </Form>
+        </Div>
+      </Div>
     </>
   )
 }

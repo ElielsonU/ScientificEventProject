@@ -10,6 +10,7 @@ interface TextInputProps {
   value: string | number;
   required?: true;
   type: "text" | "email" | "password";
+  name: string;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -20,10 +21,11 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
   width,
   required,
-  type,
+  name,
+  type
 }) => {
   if (type == "password") {
-    <StyledTextInput
+    return <StyledTextInput
       textColor={textColor}
       placeholder={placeholder}
       fontSize={fontSize}
@@ -31,6 +33,8 @@ const TextInput: React.FC<TextInputProps> = ({
       onChange={onChange}
       value={value}
       minLength={8}
+      name={name}
+      type={type}
       required
     />;
   }
@@ -43,6 +47,9 @@ const TextInput: React.FC<TextInputProps> = ({
       onChange={onChange}
       value={value}
       required={required}
+      name={name}
+      type={type}
+      autoComplete={"off"}
     />
   );
 };
