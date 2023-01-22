@@ -15,7 +15,6 @@ const StyledForm = styled.form<StyledFormProps>`
   height: ${props => props.height};
   background-color: ${props => props.backgroundColor};
   padding: 25px 5px;
-
 `
 
 export default StyledForm

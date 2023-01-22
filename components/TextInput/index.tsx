@@ -7,7 +7,7 @@ interface TextInputProps {
   fontSize: string;
   onChange?: React.ChangeEventHandler;
   width: string;
-  value: string | number;
+  value?: string | number;
   required?: true;
   type: "text" | "email" | "password";
   name: string;

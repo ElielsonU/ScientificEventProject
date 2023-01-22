@@ -34,7 +34,9 @@ h2 {
 
 
 button {
-  color: black
+  color: black;
+  border: none;
+  font-size: 12px;
 }
 
 .link {
@@ -49,6 +51,10 @@ footer {
   font-size: 20px;
   padding-bottom: 5px;
 }
+
+#email_password_reset { border-bottom: 1px #99A6B4 solid;}
+
+#email_password_reset input { border-bottom: none; }
 
 @media (prefers-color-scheme: dark) {
   html {

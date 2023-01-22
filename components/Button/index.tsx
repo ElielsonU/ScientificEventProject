@@ -1,12 +1,17 @@
+import Image from "next/image";
 import React, { PropsWithChildren } from "react";
 import StyledButton from "./styled";
 
 interface ButtonsProps extends PropsWithChildren {
-  textColor: string;
-  backgroundColor: string;
+  textColor?: string;
+  backgroundColor?: string;
   disabled?: boolean;
   onClick?: React.MouseEventHandler;
-  buttonType: "login"|"signup"|"resetpassword"|"submit";
+  buttonType: "login"|"signup"|"resetpassword"|"submit"|"icon";
+  icon?: string;
+  iconAlt?: string;
+  iconHeight?: number;
+  iconWidth?: number;
 }
 
 const Button:React.FC<ButtonsProps> = ({
@@ -15,6 +20,10 @@ const Button:React.FC<ButtonsProps> = ({
   buttonType,
   disabled,
   children,
+  icon,
+  iconAlt,
+  iconHeight,
+  iconWidth,
   onClick
 }
   ) => {
@@ -25,7 +34,7 @@ const Button:React.FC<ButtonsProps> = ({
     }
     if (buttonType == "resetpassword") {
       return disabled
-      ?(<StyledButton backgroundColor={"#2A292C"} textColor={"#2A292C"}>
+      ?(<StyledButton backgroundColor={"#2A292C"} textColor={"#2A292C"} disabled>
         {children}
       </StyledButton>
       )
@@ -37,6 +46,11 @@ const Button:React.FC<ButtonsProps> = ({
     if (buttonType == "submit") {
       return <StyledButton backgroundColor={backgroundColor} textColor={textColor} defaultDropShadow onClickCapture={onClick}>
         {children}
+      </StyledButton>
+    }
+    if (buttonType == "icon") {
+      return <StyledButton backgroundColor={backgroundColor} textColor={textColor} onClickCapture={onClick} icon={icon}>
+        <Image src={`/img/${icon}`} width={iconWidth} height={iconHeight} alt={`${iconAlt} icon`}></Image>
       </StyledButton>
     }
     return <StyledButton backgroundColor={backgroundColor} textColor={textColor} onClickCapture={onClick}>
