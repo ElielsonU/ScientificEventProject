@@ -92,7 +92,7 @@ export default function Page(props: PageProps) {
      <title>Reset password</title>
     </Head>
       <Div height="100%" width="100%" backgroundImage="background2.png" alignItems="center" flexDirection="row" justifyContent="center">
-        <Div height="430px" width="380px" alignItems="center" justifyContent="space-between" borderRadius="15px" boxShadow={props.color4} flexDirection="column" Id="LoginDiv" backgroundColor={props.color4}>
+        <Div height="430px" width="380px" alignItems="center" justifyContent="space-between" borderRadius="15px" boxShadow={props.color4} flexDirection="column" backgroundColor={props.color4}>
           <Form backgroundColor={props.color2} height="185px" width="100%" onSubmit={formSubmitHandler} name="email_form">
             <h2>Reset Your Password</h2>
             <Div alignItems="center" flexDirection="row" height="35px" justifyContent="space-between" width="auto" Id="email_password_reset">

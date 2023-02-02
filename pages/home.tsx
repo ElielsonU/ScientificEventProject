@@ -174,7 +174,7 @@ export default function Page(props: pageProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Div justifyContent="flex-start" alignItems="center" flexDirection="column" height="100%" width="100%" backgroundImage="background3.png">
+      <Div justifyContent="flex-start" alignItems="center" flexDirection="column" height="100%" width="100%" backgroundImage="background3.png" Id="homeAll">
         <Div alignItems="flex-end" flexDirection="row" width="90%" justifyContent="space-between" height="105px">
           <Div alignItems="flex-start" flexDirection="column" width="185px" justifyContent="center" height="64px" Id="user-card">
             <Image id="user-icon" src={'/img/user-icon.png'} alt="user icon" width={64} height={64}/>
@@ -188,7 +188,7 @@ export default function Page(props: pageProps) {
           :null}
           
         </Div>
-        <Div width="100%" height="80%" justifyContent="space-evenly" alignItems="center" flexDirection="row">
+        <Div width="100%" height="80%" justifyContent="space-evenly" alignItems="center" flexDirection="row" Id="homeMain">
           <Div width="380px" height="430px" justifyContent="space-evenly" alignItems="center" flexDirection="column" backgroundColor={props.color2} borderRadius="15px" boxShadow={props.color3} Id="submit-article">
               <h2>Submit an Article</h2>
             <Form height="280px" width="auto" onSubmit={articleSubmitHandler} backgroundColor="transparent">

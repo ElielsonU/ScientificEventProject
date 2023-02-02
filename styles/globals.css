@@ -145,6 +145,11 @@ footer {
     width: fit-content;
     height: fit-content;
   }
+  #homeAll {
+    height: 1200px;
+    background-size: cover;
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 375px) {
