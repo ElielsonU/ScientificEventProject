@@ -6,7 +6,7 @@ import Image from "next/image";
 interface CheckboxProps extends PropsWithChildren {
   textColor: string;
   fontSize: number;
-  onChange?: React.ChangeEventHandler;
+  onClick?: React.MouseEventHandler;
   value: string|number;
   name: string;
 }
@@ -14,7 +14,7 @@ interface CheckboxProps extends PropsWithChildren {
 const Checkbox: React.FC<CheckboxProps> = ({
   textColor,
   fontSize,
-  onChange,
+  onClick,
   value,
   name,
   children
@@ -24,8 +24,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
   return (
   <StyledCheckboxLabel fontSize={fontSize + "px"} textColor={textColor}>
     {children}
-    <StyledCheckbox onChange={(event) => {
-      onChange?onChange(event):null
+    <StyledCheckbox onClickCapture={(event) => {
+      onClick?onClick(event):null
       if (isChoiced == "/icons/cross.png"){
         return setIsChoiced("/icons/correct.png")
       }

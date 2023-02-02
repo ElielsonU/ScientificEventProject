@@ -11,7 +11,7 @@ const StyledNumberInput = styled.input<StyledNumberInputprops>`
   text-align: right;
   color: ${props => props.textColor};
   font-size: ${props => props.fontSize}px;
-  width: 85px;
+  width: 15px;
   &:focus {
     outline: none;
   }

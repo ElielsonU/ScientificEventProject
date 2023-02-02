@@ -136,16 +136,16 @@ export default function Home(props: PageProps) {
 
               <Link href={"/resetpassword"} className="link">Forgot Password</Link>
             </Div>
-            <Div justifyContent="space-around" width="100%" alignItems="center" flexDirection="row" height="min-content" >
+            <Div justifyContent="space-around" width="100%" alignItems="center" flexDirection="row-reverse" height="min-content" >
+              <Button buttonType="login" backgroundColor={props.color2} textColor={props.color3}>
+                Login
+              </Button>
+              
               <Button buttonType="signup" backgroundColor={props.color3} textColor={props.color1} onClick={(event) => {
                 event.preventDefault()
                 setIsLogin(!isLogin)
                 }}>
                 Sign Up
-              </Button>
-
-              <Button buttonType="login" backgroundColor={props.color2} textColor={props.color3}>
-                Login
               </Button>
             </Div>
 
@@ -161,20 +161,20 @@ export default function Home(props: PageProps) {
             <TextInput fontSize="24px" placeholder="Username" textColor={props.color4} value={username} type="text" width="90%" onChange={inputChangeHandler} name="name" required/>
             <TextInput fontSize="24px" placeholder="Email" textColor={props.color4} value={email} type="email" width="90%" onChange={inputChangeHandler} name="email" required/>
             <TextInput fontSize="24px" placeholder="Password" textColor={props.color4} value={password} type="password" width="90%" onChange={inputChangeHandler} name="password" required/>
-            <Checkbox fontSize={24} textColor={props.color4} value={isAdmin?0:1} onChange={inputChangeHandler} name="isAdmin">
+            <Checkbox fontSize={24} textColor={props.color4} value={isAdmin?0:1} onClick={inputChangeHandler} name="isAdmin">
                 Admin: 
             </Checkbox>
 
-            <Div justifyContent="space-around" width="100%" alignItems="center" flexDirection="row" height="min-content" >
+            <Div justifyContent="space-around" width="100%" alignItems="center" flexDirection="row-reverse" height="min-content" >
+              <Button buttonType="signup" backgroundColor={props.color3} textColor={props.color1}>
+                Sign Up
+              </Button>
+
               <Button buttonType="login" backgroundColor={props.color2} textColor={props.color3} onClick={(event) => {
                 event.preventDefault()
                 setIsLogin(!isLogin)
                 }}>
                 Login
-              </Button>
-
-              <Button buttonType="signup" backgroundColor={props.color3} textColor={props.color1}>
-                Sign Up
               </Button>
             </Div>
           </Form>

@@ -97,7 +97,7 @@ export default function Page(props: PageProps) {
             <h2>Reset Your Password</h2>
             <Div alignItems="center" flexDirection="row" height="35px" justifyContent="space-between" width="auto" Id="email_password_reset">
               <TextInput fontSize="24px" name="email" value={email} placeholder="Email" textColor={props.color4} type="email" onChange={inputChangeHandler} required width="275px"/>
-              <Button buttonType="icon" icon="send.png" iconHeight={30} iconWidth={30} backgroundColor="transparent" iconAlt="send"/>
+              <Button buttonType="icon" icon="img/send.png" iconHeight={30} iconWidth={30} backgroundColor="transparent" iconAlt="send"/>
             </Div>
           </Form>
           <Form backgroundColor={props.color2} height="242px" width="100%" onSubmit={formSubmitHandler} name="password_change_form">

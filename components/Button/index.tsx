@@ -50,7 +50,7 @@ const Button:React.FC<ButtonsProps> = ({
     }
     if (buttonType == "icon") {
       return <StyledButton backgroundColor={backgroundColor} textColor={textColor} onClickCapture={onClick} icon={icon}>
-        <Image src={`/img/${icon}`} width={iconWidth} height={iconHeight} alt={`${iconAlt} icon`}></Image>
+        <Image src={`/${icon}`} width={iconWidth} height={iconHeight} alt={`${iconAlt} icon`}></Image>
       </StyledButton>
     }
     return <StyledButton backgroundColor={backgroundColor} textColor={textColor} onClickCapture={onClick}>

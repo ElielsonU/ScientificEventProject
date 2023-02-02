@@ -28,6 +28,25 @@ h2 {
   margin: 0px;
 }
 
+h3 {
+  margin: 0px;
+  margin-bottom: 5px;
+  width: 290px;
+  height: 25px;
+  overflow: hidden;
+  font-size: 16px;
+  text-align: center;
+}
+
+textarea {
+  resize: none;
+  padding: 5px 10px;
+  font-family: 'Noto Sans';
+  background-color: transparent;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -52,9 +71,61 @@ footer {
   padding-bottom: 5px;
 }
 
+#user-card {
+  overflow: visible;
+  gap: 3px;
+}
+
+#user-card > a {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+#user-card > span {
+  font-size: 24px;
+
+}
+
+.registered-users {
+  text-align: end;
+}
+
+#submit-article > h2 {
+  color: #2288E3;
+}
+
+#submit-article > form {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px;
+}
+
+#submit-article > form > :nth-child(1) {
+  text-align: center;
+  font-weight: 700;
+}
+
 #email_password_reset { border-bottom: 1px #99A6B4 solid;}
 
 #email_password_reset input { border-bottom: none; }
+
+#user-icon {
+  border: 1px solid #2288E3;
+  border-radius: 50px;
+}
+
+.filter {
+  font-size: 18px;
+  font-weight: 900;
+  color: #99A6B4;
+}
+
+.submited-articles {
+  font-size: 12px;
+  font-weight: 700;
+  color: #99A6B4;
+}
 
 @media (prefers-color-scheme: dark) {
   html {

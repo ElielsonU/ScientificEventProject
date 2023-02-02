@@ -4,8 +4,8 @@ interface StyledDivProps {
   width: string;
   height: string;
   justifyContent: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
-  alignItems: "space-between"|"space=around"|"space-evenly"|"center"|"flex-end"|"flex-start"
-  flexDirection: "row"|"column"
+  alignItems: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
+  flexDirection: "row"|"column"|"row-reverse"|"column-reverse"
   backgroundColor?: string;
   backroundImage?:string;
   borderRadius?: string;
