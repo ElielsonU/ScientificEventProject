@@ -1,6 +1,10 @@
 import serverlessMysql from "serverless-mysql";
 import { randomUUID } from "crypto";
 
+const CreateDatabase = async () => {
+  
+}
+
 const db = serverlessMysql({
   config: {
     host: process.env.MYSQL_HOST,
@@ -10,8 +14,6 @@ const db = serverlessMysql({
     user: process.env.MYSQL_USER,
   },
 });
-db.query("USE scientificevent");
-db.end();
 
 const TokenGenerator = async (IdUsers?: number) => {
   const newToken = randomUUID();
