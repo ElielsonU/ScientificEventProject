@@ -4,15 +4,15 @@ import Image from "next/image";
 
 
 interface CheckboxProps extends PropsWithChildren {
-  textColor: string;
-  fontSize: number;
+  color?: string;
+  fontSize?: number;
   onClick?: React.MouseEventHandler;
-  value: string|number;
-  name: string;
+  value?: string|number;
+  name?: string;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
-  textColor,
+  color,
   fontSize,
   onClick,
   value,
@@ -20,9 +20,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
   children
 }) => {
   const [isChoiced, setIsChoiced] = useState("/icons/cross.png")
-
+  fontSize = fontSize||10
   return (
-  <StyledCheckboxLabel fontSize={fontSize + "px"} textColor={textColor}>
+  <StyledCheckboxLabel fontSize={fontSize + "px"} color={color}>
     {children}
     <StyledCheckbox onClickCapture={(event) => {
       onClick?onClick(event):null

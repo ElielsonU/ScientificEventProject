@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 interface TextInputProps {
-  textColor: string;
-  width: string;
+  textColor?: string;
+  width?: string;
   textAlign?: string;
-  fontSize: string;
+  fontSize?: string;
 }
 
 const StyledTextInput = styled.input<TextInputProps>`

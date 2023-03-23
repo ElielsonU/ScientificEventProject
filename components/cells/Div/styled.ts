@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 interface StyledDivProps {
-  width: string;
-  height: string;
-  justifyContent: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
-  alignItems: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
-  flexDirection: "row"|"column"|"row-reverse"|"column-reverse"
+  width?: string;
+  height?: string;
+  justifyContent?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
+  alignItems?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
+  flexDirection?: "row"|"column"|"row-reverse"|"column-reverse"
   backgroundColor?: string;
   backroundImage?:string;
   borderRadius?: string;

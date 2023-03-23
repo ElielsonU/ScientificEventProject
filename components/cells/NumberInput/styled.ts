@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 interface StyledNumberInputprops {
-  textColor: string;
-  fontSize: number;
+  color?: string;
+  fontSize?: number;
 }
 
 const StyledNumberInput = styled.input<StyledNumberInputprops>`
   background-color: transparent;
   border: none;
   text-align: right;
-  color: ${props => props.textColor};
+  color: ${props => props.color};
   font-size: ${props => props.fontSize}px;
   width: 15px;
   &:focus {
@@ -24,12 +24,12 @@ const StyledNumberInput = styled.input<StyledNumberInputprops>`
 `
 
 interface StyledNumberInputLabelProps {
-  textColor: string;
-  fontSize: number;
+  color?: string;
+  fontSize?: number;
 }
 
 const StyledNumberInputLabel = styled.label<StyledNumberInputLabelProps> `
-  color: ${props => props.textColor};
+  color: ${props => props.color};
   font-size: ${props => props.fontSize}px;
   border-bottom: 2px solid;
   gap: 10px;

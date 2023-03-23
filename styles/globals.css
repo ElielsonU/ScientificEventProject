@@ -6,174 +6,22 @@ body {
   height: 100%;
 }
 
-#__next {
-  height: 100%;
+#__next { height: inherit; }
+
+#__next > * {
+  height: inherit;
+  width: inherit;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-a {
-  color: #FCF9F8;
-  text-decoration: none;
-}
+#-login { background-image: url("/imgs/backgrounds/login.png"); }
 
-h1 {
-  display: inline;
-  margin: 0px;
-  font-size: 40px;
-  text-shadow: 0px 0px 6px;
-}
+#-home { background-image: url("/imgs/backgrounds/home.png"); }
 
-h2 {
-  font-size: 30px;
-  color: #99A6B4;
-  margin: 0px;
-}
-
-h3 {
-  margin: 0px;
-  margin-bottom: 5px;
-  width: 290px;
-  height: 25px;
-  overflow: hidden;
-  font-size: 16px;
-  text-align: center;
-}
-
-textarea {
-  resize: none;
-  padding: 5px 10px;
-  font-family: 'Noto Sans';
-  background-color: transparent;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+#-resetpassword { background-image: url("/imgs/backgrounds/resetpassword.png"); }
 
 button {
-  color: black;
+  background-color: none;
   border: none;
-  font-size: 12px;
-}
-
-.link {
-  text-decoration: underline;
-  font-weight: 600;
-  margin: 0px 8px;
-  font-size: 10px;
-  color: #FCF9F8;
-}
-
-footer {
-  font-size: 20px;
-  padding-bottom: 5px;
-}
-
-#user-card {
-  overflow: visible;
-  gap: 3px;
-}
-
-#user-card > a {
-  cursor: pointer;
-  text-decoration: underline;
-  font-size: 18px;
-}
-
-#user-card > span {
-  font-size: 24px;
-
-}
-
-.registered-users {
-  text-align: end;
-}
-
-#submit-article > h2 {
-  color: #2288E3;
-}
-
-#submit-article > form {
-  display: flex;
-  justify-content: space-between;
-  padding: 0px;
-}
-
-#submit-article > form > :nth-child(1) {
-  text-align: center;
-  font-weight: 700;
-}
-
-#email_password_reset { border-bottom: 1px #99A6B4 solid;}
-
-#email_password_reset input { border-bottom: none; }
-
-#user-icon {
-  border: 1px solid #2288E3;
-  border-radius: 50px;
-}
-
-.filter {
-  font-size: 18px;
-  font-weight: 900;
-  color: #99A6B4;
-}
-
-.submited-articles {
-  font-size: 12px;
-  font-weight: 700;
-  color: #99A6B4;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-}
-
-@media (max-width: 750px) {
-  .FormImg {
-    display: none;
-  }
-  #LoginDiv {
-    width: fit-content;
-    height: fit-content;
-  }
-  #homeAll {
-    height: 1200px;
-    background-size: cover;
-    justify-content: space-between;
-  }
-}
-
-@media (max-width: 375px) {
-  h1 {
-    font-size: 30px;
-  }
-  h2 {
-    font-size: 25px;
-  }
-  #LoginForm {
-    width: 350px;
-    height: 400px;
-  }
-}
-
-@media (max-Width: 320px) {
-  h1 {
-    font-size: 25px;
-  }
-  h2 {
-    font-size: 20px;
-  }
-  #LoginForm {
-    width: 250px;
-    height: 300px;
-  }
 }

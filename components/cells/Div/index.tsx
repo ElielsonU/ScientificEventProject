@@ -2,11 +2,11 @@ import React, { PropsWithChildren } from "react";
 import StyledDiv from "./styled";
 
 interface DivProps extends PropsWithChildren {
-  width: string;
-  height: string;
-  justifyContent: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
-  alignItems: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
-  flexDirection: "row"|"column"|"row-reverse"|"column-reverse"
+  width?: string;
+  height?: string;
+  justifyContent?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
+  alignItems?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
+  flexDirection?: "row"|"column"|"row-reverse"|"column-reverse"
   borderRadius?: string;
   backgroundColor?: string;
   backgroundImage?: string;

@@ -4,11 +4,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
 import Head from "next/head";
-import Div from "../components/Div";
-import Form from "../components/Form";
-import TextInput from "../components/TextInput";
-import Button from "../components/Button";
-import Image from "next/image";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const color1 = "#FCF9F8"
@@ -91,24 +86,7 @@ export default function Page(props: PageProps) {
     <Head>
      <title>Reset password</title>
     </Head>
-      <Div height="100%" width="100%" backgroundImage="background2.png" alignItems="center" flexDirection="row" justifyContent="center">
-        <Div height="430px" width="380px" alignItems="center" justifyContent="space-between" borderRadius="15px" boxShadow={props.color4} flexDirection="column" backgroundColor={props.color4}>
-          <Form backgroundColor={props.color2} height="185px" width="100%" onSubmit={formSubmitHandler} name="email_form">
-            <h2>Reset Your Password</h2>
-            <Div alignItems="center" flexDirection="row" height="35px" justifyContent="space-between" width="auto" Id="email_password_reset">
-              <TextInput fontSize="24px" name="email" value={email} placeholder="Email" textColor={props.color4} type="email" onChange={inputChangeHandler} required width="275px"/>
-              <Button buttonType="icon" icon="img/send.png" iconHeight={30} iconWidth={30} backgroundColor="transparent" iconAlt="send"/>
-            </Div>
-          </Form>
-          <Form backgroundColor={props.color2} height="242px" width="100%" onSubmit={formSubmitHandler} name="password_change_form">
-            <TextInput fontSize="24px" name="new_password" value={newPassword} placeholder="New password" textColor={props.color4} type="password" onChange={inputChangeHandler} required width="330px"/>
-            <TextInput fontSize="24px" name="repeat_password" placeholder="Confirm Password" textColor={props.color4} type="password" onChange={inputChangeHandler} required width="330px"/>
-            <Button backgroundColor={props.color4} buttonType="resetpassword" textColor={props.color2} disabled={!emailExists}>
-              Reset Your Password
-            </Button>
-          </Form>
-        </Div>
-      </Div>
+
     </>
   )
 }
