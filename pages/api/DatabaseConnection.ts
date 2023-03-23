@@ -1,10 +1,6 @@
 import serverlessMysql from "serverless-mysql";
 import { randomUUID } from "crypto";
 
-const CreateDatabase = async () => {
-  
-}
-
 const db = serverlessMysql({
   config: {
     host: process.env.MYSQL_HOST,

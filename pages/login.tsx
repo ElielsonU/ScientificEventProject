@@ -86,12 +86,6 @@ export default function Home(props: PageProps) {
     setTimeout(router.reload, 20);
   };
 
-  const failedAttempsController = () => {
-    setTimeout(() => {
-      setFailedAttemps(0);
-    }, 10 * 1000);
-  };
-
 
   const formSubmitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -136,6 +130,7 @@ export default function Home(props: PageProps) {
 
               <Link href={"/resetpassword"} className="link">Forgot Password</Link>
             </Div>
+
             <Div justifyContent="space-around" width="100%" alignItems="center" flexDirection="row-reverse" height="min-content" >
               <Button buttonType="login" backgroundColor={props.color2} textColor={props.color3}>
                 Login
@@ -159,8 +154,11 @@ export default function Home(props: PageProps) {
             <h2>Join Our Event!</h2>
 
             <TextInput fontSize="24px" placeholder="Username" textColor={props.color4} value={username} type="text" width="90%" onChange={inputChangeHandler} name="name" required/>
+
             <TextInput fontSize="24px" placeholder="Email" textColor={props.color4} value={email} type="email" width="90%" onChange={inputChangeHandler} name="email" required/>
+
             <TextInput fontSize="24px" placeholder="Password" textColor={props.color4} value={password} type="password" width="90%" onChange={inputChangeHandler} name="password" required/>
+
             <Checkbox fontSize={24} textColor={props.color4} value={isAdmin?0:1} onClick={inputChangeHandler} name="isAdmin">
                 Admin: 
             </Checkbox>

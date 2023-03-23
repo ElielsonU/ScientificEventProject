@@ -224,7 +224,7 @@ export default function Page(props: pageProps) {
                   changeActualArticle(1)
                 }}/>
               </Div>
-              <textarea name="" cols={40} rows={9} readOnly value={resArticles[actualArticle]?.Content}/>
+              <textarea name="" cols={40} rows={9} readOnly value={resArticles[actualArticle]?.Content || ""}/>
               <Div height="auto" backgroundColor={props.color2} width="100%" alignItems="center" flexDirection="row" justifyContent="space-around">
                 {isAdmin
                 ? <span className="submited-articles">

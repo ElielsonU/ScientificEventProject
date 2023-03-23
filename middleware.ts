@@ -8,7 +8,7 @@ const middleware: NextMiddleware = (req, e) => {
   if ((thisPath == "/login" || thisPath == "/resetpassword") && token) {
     return NextResponse.redirect("http://localhost:3000/home");
   }
-  if (thisPath == "/home" && !token) {
+  else if (thisPath == "/home" && !token) {
     return NextResponse.redirect("http://localhost:3000/login")
   }
 };
