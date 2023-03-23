@@ -62,7 +62,7 @@
 
 </p>
 <p>
-    <h4><strong>Now turn the database acessible for localhost: </strong></h4>
+    <h4><strong>Turn the database acessible for localhost: </strong></h4>
     
 
     alter user 'root'@'localhost' indetified with mysql_native_password by 'yourpassword';
