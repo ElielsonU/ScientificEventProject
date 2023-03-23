@@ -61,6 +61,13 @@
     )
 
 </p>
+<p>
+    <h4><strong>The line bellow will turn the database acessible for localhost: </strong></h4>
+    
+
+    alter user 'root'@'localhost' indetified with mysql_native_password by 'yourpassword';
+
+</p>
 </section>
 <h3>Now, you need to config the .env file, follow the bellow steps:</h3>
 <br/>
