@@ -9,7 +9,7 @@ interface StyledCheckboxLabelProps {
 
 const StyledCheckboxLabel = styled.label<StyledCheckboxLabelProps>`
   color: ${ props => props.color};
-  border-bottom: 2px solid;
+  border-bottom: 1px solid;
   font-size: ${props => props.fontSize};
   gap: 10px;
   display: flex;

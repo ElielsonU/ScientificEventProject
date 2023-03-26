@@ -14,7 +14,7 @@ const StyledButton = styled.button<ButtonsProps>`
   color: ${props => (props.color || "inherit")};
   background-color: ${props => (props.bgColor || "inherit")};
   box-shadow: 0px 0px 4px ${props => props.defaultDropShadow?props.bgColor:"none"};
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   ${props => props.icon?"": `
   border-radius: 15px; 

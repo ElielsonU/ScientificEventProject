@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 interface StyledDivProps {
-  width?: string;
-  height?: string;
   justifyContent?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
   alignItems?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start"
   flexDirection?: "row"|"column"|"row-reverse"|"column-reverse"
@@ -10,9 +8,13 @@ interface StyledDivProps {
   backroundImage?:string;
   borderRadius?: string;
   boxShadow?: string;
+  height?: string;
+  color?: string;
+  width?: string;
 }
 
 const StyledDiv = styled.div<StyledDivProps>`
+  color: ${props => props.color};
   display: flex;
   justify-content: ${props => props.justifyContent};
   align-items: ${props => props.alignItems};

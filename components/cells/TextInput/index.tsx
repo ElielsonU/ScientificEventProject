@@ -2,14 +2,15 @@ import React, { PropsWithChildren } from "react";
 import StyledTextInput from "./styled";
 
 interface TextInputProps {
-  color?: string;
-  placeholder?: string;
-  fontSize?: string;
   onChange?: React.ChangeEventHandler;
-  width?: string;
-  value?: string | number;
-  required?: true;
   type: "text" | "email" | "password";
+  value?: string | number;
+  placeholder?: string;
+  readonly?: boolean;
+  fontSize?: string;
+  required?: true;
+  color?: string;
+  width?: string;
   name: string;
 }
 
@@ -17,10 +18,11 @@ const TextInput: React.FC<TextInputProps> = ({
   color: textColor,
   placeholder,
   fontSize,
+  required,
   onChange,
+  readonly,
   value,
   width,
-  required,
   name,
   type
 }) => {
@@ -29,6 +31,7 @@ const TextInput: React.FC<TextInputProps> = ({
     return <StyledTextInput
       textColor={textColor}
       placeholder={placeholder}
+      readOnly={readonly}
       fontSize={fontSize}
       width={width}
       onChange={onChange}
@@ -51,6 +54,7 @@ const TextInput: React.FC<TextInputProps> = ({
       name={name}
       type={type}
       autoComplete={"off"}
+      readOnly={readonly}
     />
   );
 };

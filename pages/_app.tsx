@@ -7,7 +7,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const {asPath} = useRouter();
   const Page = asPath.replace("/", "-");
-  console.log(Page)
 
   return (
     <Div Id={Page} alignItems="center">

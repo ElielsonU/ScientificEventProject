@@ -9,19 +9,50 @@ body {
 #__next { height: inherit; }
 
 #__next > * {
-  height: inherit;
-  width: inherit;
   background-repeat: no-repeat;
   background-size: cover;
+  flex-direction: column;
+  height: inherit;
+  width: inherit;
 }
 
-#-login { background-image: url("/imgs/backgrounds/login.png"); }
+#-login { 
+  align-items: center;
+  background-image: url("/imgs/backgrounds/login.png");
+  display: flex;
+  justify-content: space-around;
+}
 
-#-home { background-image: url("/imgs/backgrounds/home.png"); }
+#-home { 
+  background-image: url("/imgs/backgrounds/home.png"); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-#-resetpassword { background-image: url("/imgs/backgrounds/resetpassword.png"); }
+#-resetpassword { 
+  background-image: url("/imgs/backgrounds/resetpassword.png"); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forgot-pass-link {
+  font-size: 12px;
+  color: #FCF9F8;
+}
+
+#email-checker { border-bottom: 1px solid; }
+
+a { color: inherit; }
+
+h1 { margin: 0; }
 
 button {
   background-color: none;
   border: none;
+}
+
+@media (max-width: 590px) { 
+  .login-card-img { display: none; }
 }

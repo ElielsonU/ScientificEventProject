@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface StyledHeaderProps { justifyContent: "space-between"|"space-evenly" }
+interface StyledHeaderProps { justifyContent?: "space-between"|"space-evenly" }
 
 const StyledHeader = styled.header<StyledHeaderProps>`
   display: flex;
