@@ -42,7 +42,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
 }
 
 #-resetpassword { 
@@ -99,6 +98,12 @@ textarea {
   padding: 3px 4px;
 }
 
-@media (max-width: 590px) { 
+@media (max-width: 615px) { 
   .login-card-img { display: none; }
+  #-home {
+    height: auto;
+  }
+  #-home > div { 
+    height: 900px;
+  }
 }

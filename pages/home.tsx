@@ -120,7 +120,7 @@ export default function Page(props: pageProps) {
         </Div>
         {props.subbedUsers? <Span color={props.colors.c4} fontSize="12px">Registered users: {props.subbedUsers}</Span> : null}
       </Header>
-
+      
       <Div justifyContent="space-evenly" width="100%" height="80%" alignItems="center">
         <FormCard colors={props.colors} type="submitarticle" user={props.user}/>
         <FormCard colors={props.colors} type="viewarticles" articles={props.articles} subbedUsers={props.subbedUsers} user={props.user}/>
