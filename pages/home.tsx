@@ -1,6 +1,6 @@
-import { removeCookies } from "cookies-next";
+import { deleteCookie } from "cookies-next";
 import { GetServerSideProps } from "next";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
 
@@ -24,18 +24,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return res.data.msg
   }
 
-  const getUsers = async (admin: boolean) => {
-    let res;
+  const getUsers = async (admin: number) => {
     if (admin) {
-      res = await axios.get("http://localhost:3000/api/getallusers")
+      const res = await axios.get("http://localhost:3000/api/getallusers")
+      return res?.data.msg
     }
-    
-    return Number(res?.data.msg)
+
+    return 0
+
+
   }
 
   const user = await getUserByToken({loggedAs: context.req.cookies.loggedAs})
   
-  const subbedUsers = await getUsers(user.isAdmin)
+  const subbedUsers = await getUsers(user.IsAdmin)
 
   const allowed = await getArticles({loggedAs: context.req.cookies.loggedAs, allowed: true})
   const notAllowed = await getArticles({loggedAs: context.req.cookies.loggedAs})
@@ -97,7 +99,7 @@ export default function Page(props: pageProps) {
   const router = useRouter()
 
   const disconnect = () => {
-    removeCookies("loggedAs")
+    deleteCookie("loggedAs")
     router.replace("/login")
   }
 
@@ -108,15 +110,15 @@ export default function Page(props: pageProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header >
+      <Header width="90%" justifyContent="space-between">
         <Div height="60px" alignItems="flex-start" justifyContent="center" >
           <Image src={"/imgs/user-icon.png"} alt="user icon" width={60} height={60}/>
           <Div flexDirection="column" alignItems="flex-start" justifyContent="center">
             <Span color={props.colors.c1} fontSize="20px">{props.user.Username}</Span>
-            <a onClick={() => {}} id="disconnect-a">Disconnect</a>
+            <a onClick={disconnect} id="disconnect-a">Disconnect</a>
           </Div>
         </Div>
-        {props.subbedUsers? <Span>{props.subbedUsers}</Span> : null}
+        {props.subbedUsers? <Span color={props.colors.c4} fontSize="12px">Registered users: {props.subbedUsers}</Span> : null}
       </Header>
 
       <Div justifyContent="space-evenly" width="100%" height="80%" alignItems="center">

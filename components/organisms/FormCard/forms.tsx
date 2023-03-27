@@ -298,13 +298,19 @@ const ViewArticlesForm:React.FC<ViewArticlesFormProps> = ({
 }) => {
     const [allArticles, setAllarticles] = useState(articles)
     const [articlesList, setArticlesList] = useState( allArticles?.allowed )
-    const [notAllowedArticles, setNotAllowedArticles] = useState(true)
+    const [allowedArticles, setAllowedArticles] = useState(false)
     const [actualArticle, setActualArticle] = useState(0)
     const [userId, setUserId] = useState(0)
     const [title, setTitle] = useState("")
 
     useEffect(() => {
-        const usedArticles = notAllowedArticles
+        if (!user?.IsAdmin){
+            setAllowedArticles(true)
+        }
+    })
+
+    useEffect(() => {
+        const usedArticles = allowedArticles
         ?allArticles?.allowed
         :allArticles?.notAllowed
 
@@ -322,12 +328,12 @@ const ViewArticlesForm:React.FC<ViewArticlesFormProps> = ({
     }, [userId, title])
 
     const allowedChangeHandler = (event:React.MouseEvent) => {
-        setNotAllowedArticles(!notAllowedArticles)
-        if (!notAllowedArticles){
-            return setArticlesList(articles?.notAllowed)
+        setAllowedArticles(allowedArticles?false:true)
+        if (!allowedArticles){
+            return setArticlesList(articles?.allowed)
         }
 
-        setArticlesList(articles?.allowed)
+        setArticlesList(articles?.notAllowed)
     }  
 
     const titleChangeHandler = (event:React.ChangeEvent) => {
@@ -351,10 +357,11 @@ const ViewArticlesForm:React.FC<ViewArticlesFormProps> = ({
         if  (await deleteArticle({IdArticle}))
         {
             setActualArticle(actualArticle-1)
-            if (notAllowedArticles) {
+            if (allowedArticles) {
                 return allArticles?.allowed.splice(actualArticle, 1)
             }
             allArticles?.notAllowed.splice(actualArticle, 1)
+            setArticlesList(allArticles?.notAllowed)
         }
     }
 
@@ -362,11 +369,12 @@ const ViewArticlesForm:React.FC<ViewArticlesFormProps> = ({
         const acceptedArticle = allArticles?.notAllowed.at(actualArticle)
         if  (await addAcceptedArticle({IdArticle: acceptedArticle?.IdArticle}))
         {
-            setActualArticle(actualArticle-1)
+            setActualArticle(0)
             allArticles?.notAllowed.splice(actualArticle, 1)
             if (acceptedArticle) {
                 allArticles?.allowed.push(acceptedArticle)
             }
+            setArticlesList(allArticles?.notAllowed)
         }
     }
 
@@ -379,7 +387,7 @@ const ViewArticlesForm:React.FC<ViewArticlesFormProps> = ({
                     <NumberInput name="user-id" setValue={setUserId} value={userId} color={colors.c4} fontSize={13}>User ID</NumberInput>
 
                     {user?.IsAdmin
-                    ?<Checkbox fontSize={13} color={colors.c4} onClick={allowedChangeHandler} value={notAllowedArticles}>Only allowed</Checkbox> 
+                    ?<Checkbox fontSize={13} color={colors.c4} onClick={allowedChangeHandler} value={allowedArticles}>Only allowed</Checkbox> 
                     :null}
                 </Div>
 
@@ -410,7 +418,7 @@ const ViewArticlesForm:React.FC<ViewArticlesFormProps> = ({
                         ? <Button type="icon" icon="cross" iconHeight={10} iconWidth={10} onClick={removeArticle}/>
                         : null }
                         
-                        {!notAllowedArticles? null
+                        {allowedArticles? null
                         :<Button type="icon" icon="correct" iconHeight={10} iconWidth={10} onClick={acceptArticle}/>}
                     </Div>
                 </Div>
