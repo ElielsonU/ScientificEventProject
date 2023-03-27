@@ -3,21 +3,27 @@ import React, { PropsWithChildren } from "react";
 import StyledButton from "./styled";
 
 interface ButtonsProps extends PropsWithChildren {
-  color?: string;
-  bgColor?: string;
-  disabled?: boolean;
-  onClick?: React.MouseEventHandler;
-  padding?: boolean;
   type: "login"|"signup"|"resetpassword"|"submit"|"icon";
+  onClick?: React.MouseEventHandler;
+  disabled?: boolean;
+  iconWidth?: number;
+  iconHeight?: number;
+  padding?: boolean;
+  bgColor?: string;
+  color?: string;
+  icon?: string;
 }
 
 const Button:React.FC<ButtonsProps> = ({
+  iconHeight,
+  iconWidth,
+  disabled,
+  children,
+  onClick,
   bgColor,
   color,
   type,
-  disabled,
-  children,
-  onClick
+  icon,
 }
   ) => {
     if (type == "login") {
@@ -43,7 +49,7 @@ const Button:React.FC<ButtonsProps> = ({
     }
     if (type == "icon") {
       return <StyledButton bgColor={bgColor} color={color} onClickCapture={onClick} icon>
-        <Image src={`/icons/send.png`} width={20} height={20} alt={"send icon"}></Image>
+        <Image src={`/icons/${icon}.png`} width={iconWidth||20} height={iconHeight||20} alt={"send icon"} style={{verticalAlign: "middle"}}/>
       </StyledButton>
     }
     return <StyledButton bgColor={bgColor} color={color} onClickCapture={onClick}>

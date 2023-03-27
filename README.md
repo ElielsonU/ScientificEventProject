@@ -54,8 +54,8 @@
     create table if not exists articles(
         IdArticle int unsigned not null auto_increment primary key,
         Allowed boolean,
-        Content varchar(800) not null,
-        Title varchar(20),
+        Content varchar(2000) not null,
+        Title varchar(30),
         User_ID int unsigned,
         foreign key (User_ID) references users (IdUsers)
     )

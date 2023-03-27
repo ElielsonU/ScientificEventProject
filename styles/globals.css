@@ -1,3 +1,16 @@
+@keyframes rightToLeft {
+  0% {
+    transform: translateX(200px);
+  }
+  100% {
+    transform: translateX(-160px);
+  }
+}
+
+* {
+  font-family: 'Noto Sans';
+}
+
 html,
 body {
   padding: 0;
@@ -28,6 +41,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
 }
 
 #-resetpassword { 
@@ -44,6 +59,33 @@ body {
 
 #email-checker { border-bottom: 1px solid; }
 
+#submit-article-div > button {
+  margin-right: 5px;
+}
+
+#article-title {
+  max-width: 170px;
+  height: 28px;
+}
+
+#article-title > h1 {
+  height: inherit;
+  width: 700px;
+  word-wrap: normal;
+  animation-name: rightToLeft;
+  white-space: nowrap;
+  animation-duration: 4.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+#disconnect-a {
+  text-decoration: underline;
+  color: #FCF9F8;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 a { color: inherit; }
 
 h1 { margin: 0; }
@@ -51,6 +93,10 @@ h1 { margin: 0; }
 button {
   background-color: none;
   border: none;
+}
+
+textarea {
+  padding: 3px 4px;
 }
 
 @media (max-width: 590px) { 

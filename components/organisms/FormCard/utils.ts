@@ -68,4 +68,48 @@ const resetPassword = async (props: resetPasswordProps) => {
     }
 }
 
-export {login, signUp, checkEmail, resetPassword}
+interface submitArticleProps {
+    articleTitle: string;
+    articleContent: string;
+    loggedAs?: string;
+}
+
+const submitArticle = async (props: submitArticleProps) => {
+    try {
+        const res = await axios.post("/api/submitarticle", props)
+        alert(res.data.msg)
+        return true
+    } catch (e: any) {
+        alert(e.response.data.msg)
+        return false
+    }
+}
+
+interface adminActionsArticleProps {
+    IdArticle?: number;
+}
+
+const deleteArticle = async (props: adminActionsArticleProps) => {
+    try {
+        const res = await axios.post("/api/adminactions", {...props, command: false})
+        alert(res.data.msg)
+        return true
+    } catch (e: any) {
+        alert(e.response.data.msg)
+        return false
+    }
+}
+
+const addAcceptedArticle = async (props: adminActionsArticleProps) => {
+    try {
+        const res = await axios.post("/api/adminactions", {...props, command: true})
+        alert(res.data.msg)
+        return true
+    } catch (e: any) {
+        alert(e.response.data.msg)
+        return false
+    }
+}
+
+
+export {login, signUp, checkEmail, resetPassword, submitArticle, deleteArticle, addAcceptedArticle}

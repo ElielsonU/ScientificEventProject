@@ -10,23 +10,26 @@ interface articlesProps {
 }
 
 const handler: NextApiHandler = async (req, res) => {
-  const userIsAdmin = (await getUsers({token: req.cookies.loggedAs})).IsAdmin
+  
+  const token = req.cookies.loggedAs||req.body.loggedAs
+  
+  const userIsAdmin = (await getUsers({token})).IsAdmin
   if (!userIsAdmin) {
-    const articles: Array<articlesProps> = await getArticles({
+    const msg: Array<articlesProps> = await getArticles({
       title: req.body.title,
       IdUsers: req.body.IdUsers, 
       allowed: true
       }
     )
-    res.status(200).json({articles})
+    res.status(200).json({msg})
     return
   }
-  const articles = await getArticles({
+  const msg = await getArticles({
     allowed: req.body.allowed,
     IdUsers: req.body.IdUsers,
     title: req.body.title
   })
-  res.status(200).json({articles})
+  res.status(200).json({msg})
 }
 
 export default handler

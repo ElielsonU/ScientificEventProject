@@ -2,8 +2,8 @@ import { NextApiHandler } from "next";
 import { getUsers } from "./DatabaseConnection";
 
 const handler: NextApiHandler = async (req, res) => {
-  const subbedUsers = (await getUsers({})).length
-  res.status(200).json({subbedUsers})
+  const msg = (await getUsers({})).length
+  res.status(200).json({msg})
 }
 
 export default handler

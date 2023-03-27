@@ -3,9 +3,12 @@ import StyledTextInput from "./styled";
 
 interface TextInputProps {
   onChange?: React.ChangeEventHandler;
+  textAlign?: "center" | "right"| "left";
   type: "text" | "email" | "password";
   value?: string | number;
   placeholder?: string;
+  fontWeight?: string;
+  maxLenght?: number;
   readonly?: boolean;
   fontSize?: string;
   required?: true;
@@ -17,6 +20,9 @@ interface TextInputProps {
 const TextInput: React.FC<TextInputProps> = ({
   color: textColor,
   placeholder,
+  fontWeight,
+  textAlign,
+  maxLenght,
   fontSize,
   required,
   onChange,
@@ -29,12 +35,14 @@ const TextInput: React.FC<TextInputProps> = ({
 
   if (type == "password") {
     return <StyledTextInput
-      textColor={textColor}
       placeholder={placeholder}
+      fontWeight={fontWeight}
+      textAlign={textAlign}
+      textColor={textColor}
       readOnly={readonly}
       fontSize={fontSize}
-      width={width}
       onChange={onChange}
+      width={width}
       value={value}
       minLength={8}
       name={name}
@@ -44,17 +52,20 @@ const TextInput: React.FC<TextInputProps> = ({
   }
   return (
     <StyledTextInput
-      textColor={textColor}
       placeholder={placeholder}
+      fontWeight={fontWeight}
+      textAlign={textAlign}
+      textColor={textColor}
+      maxLength={maxLenght}
+      autoComplete="off"
       fontSize={fontSize}
-      width={width}
-      onChange={onChange}
-      value={value}
       required={required}
+      onChange={onChange}
+      readOnly={readonly}
+      value={value}
+      width={width}
       name={name}
       type={type}
-      autoComplete={"off"}
-      readOnly={readonly}
     />
   );
 };

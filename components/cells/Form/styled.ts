@@ -4,6 +4,7 @@ interface StyledFormProps {
   justifyContent?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start";
   alignItems?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start";
   backgroundColor?: string;
+  borderRadius?:string;
   boxShadow?: string;
   height?: string;
   width?: string; 
@@ -12,6 +13,7 @@ interface StyledFormProps {
 const StyledForm = styled.form<StyledFormProps>`
   display: flex;
   justify-content: ${props => props.justifyContent};
+  border-radius: ${props => props.borderRadius};
   align-items: ${props => props.alignItems};
   flex-direction: column;
   align-items: center;

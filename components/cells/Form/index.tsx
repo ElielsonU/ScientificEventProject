@@ -6,6 +6,7 @@ interface FormProps extends PropsWithChildren {
   alignItems?: "space-between"|"space-around"|"space-evenly"|"center"|"flex-end"|"flex-start";
   onSubmit: React.FormEventHandler;
   backgroundColor?: string;
+  borderRadius?: string;
   boxShadow?: string;
   height?: string;
   width?: string;
@@ -15,6 +16,8 @@ interface FormProps extends PropsWithChildren {
 const Form: React.FC<FormProps> = ({
   backgroundColor,
   justifyContent,
+  borderRadius,
+  alignItems,
   boxShadow,
   children,
   onSubmit,
@@ -22,7 +25,7 @@ const Form: React.FC<FormProps> = ({
   width,
   name,
 }) => (
-  <StyledForm backgroundColor={backgroundColor} width={width} height={height} onSubmit={onSubmit} name={name} justifyContent={justifyContent} boxShadow={boxShadow}>
+  <StyledForm backgroundColor={backgroundColor} width={width} height={height} onSubmit={onSubmit} name={name} justifyContent={justifyContent} boxShadow={boxShadow} borderRadius={borderRadius} alignItems={alignItems}>
     {children}
   </StyledForm>
 )
